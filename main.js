@@ -1,346 +1,116 @@
 console.log('Hello World!');
 
+let timeone = document.getElementById('time-one');
+let section =document.querySelector('section');
+let  tio = document.getElementById('tio');
+let  tiop = document.getElementById('tiop');
+let  ti = document.getElementById('ti');
+let win =document.querySelector('.win');
+let thend =document.querySelector('.the-end');
 
-
-// display nav
-let dd=document.querySelector("#d");
-let heah=document.querySelector("nav")
-dd.onclick=function(){
- heah.style.display="flex" ;
-
-}
-
-
-const bb=document.querySelector("#b");
-const nav=document.querySelector("nav");
-bb.onclick=function(){
-   nav.style.display="none" ;
-
-}
-
-let box=document.querySelectorAll('.box img ')
-
-let h1=document.querySelector('.h1 ')
-let h2=document.querySelector('.h2 ')
-let h3=document.querySelector('.h3 ')
-let h4=document.querySelector('.h4 ')
-let h5=document.querySelector('.h5 ')
-let h6=document.querySelector('.h6 ')
-let h7=document.querySelector('.h7 ')
-let h8=document.querySelector('.h8 ')
-
-let img1=document.getElementById('img1')
-let img2=document.getElementById('img2')
-let img3=document.getElementById('img3')
-let img4=document.getElementById('img4')
-let img5=document.getElementById('img5')
-let img6=document.getElementById('img6')
-let img7=document.getElementById('img7')
-let img8=document.getElementById('img8')
-
-img1.onclick=function () {
-
-   h1.style.display='block'
-h1.style.transform="scalex(0.5)"
-   h1.src='index.html'
-     h2.style.display='none'
-     h3.style.display='none'
-     h4.style.display='none'
-     h5.style.display='none'
-     h6.style.display='none'
-     h7.style.display='none'
-     h8.style.display='none'
-
-}
-
-img2.onclick=function () {
-
-   h2.style.display='block'
- h2.innerHTML='D I S C O V E R'
-h2.style.transform="scalex(0.5)"
-   
-       h1.style.display='none'
-       h3.style.display='none'
-     h4.style.display='none'
-     h5.style.display='none'
-     h6.style.display='none'
-     h7.style.display='none'
-     h8.style.display='none'
-
-}
-
-// window.onclick=function () {
-//   h2.style.display='none'
-//   h1.style.display='none'
-//   h3.style.display='none'
-//   h4.style.display='none'
-//   h5.style.display='none'
-//   h6.style.display='none'
-//   h7.style.display='none'
-//   h8.style.display='none'
-
-// }
-img3.onclick=function () {
-
-   h3.style.display='block'
- h3.innerHTML='D I S C O V E R'
-h3.style.transform="scalex(0.5)"
-   
-       h1.style.display='none'
-       h2.style.display='none'
-     h4.style.display='none'
-     h5.style.display='none'
-     h6.style.display='none'
-     h7.style.display='none'
-     h8.style.display='none'
-
+function countdowr() {
+timeone.innerHTML-=1;
+  if (timeone.innerHTML==="0") {
+    clearInterval(counter);
+section.style.display='none';
+thend.style.display='block';
+tio.innerHTML=localStorage.getItem('nex')
+t.innerHTML=localStorage.getItem('nex2')
+  }
+  if (timeone.innerHTML==="10") {
+    timeone.style.color='red'
+  }
+   if (localStorage.getItem('nex')<9) {
+    win.innerHTML='👎اسف, حاول مجددا'
+  } 
+  if(localStorage.getItem('nex')>9) {
+    win.innerHTML='👏 احسنت'
+  }
   
 }
-img4.onclick=function () {
+let counter=setInterval(countdowr,2000)
 
-   h4.style.display='block'
- h4.innerHTML='D I S C O V E R'
-h4.style.transform="scalex(0.5)"
-   
-       h1.style.display='none'
-       h2.style.display='none'
-     h3.style.display='none'
-     h5.style.display='none'
-     h6.style.display='none'
-     h7.style.display='none'
-     h8.style.display='none'
+function generateRandomOperation() {
+  const num1 = Math.floor(Math.random() * 11);
+  const num2 = Math.floor(Math.random() * 11);
+  const operations = ['+', '-', '*'];
+  const operation = operations[Math.floor(Math.random() * operations.length)];
+  return { num1, num2, operation };
+}
 
+function calculateResult(num1, num2, operation) {
+  switch (operation) {
+    case '+':
+      return num1 + num2;
+    case '-':
+      return num1 - num2;
+    case '*':
+      return num1 * num2;
+    case '/':
+      return num2 !== 0 ? num1 / num2 : null;
+    default:
+      return null;
+  }
+}
+
+function newOperation() {
+  const { num1, num2, operation } = generateRandomOperation();
+  const correctAnswer = calculateResult(num1, num2, operation);
+  if (correctAnswer === null) {
+    return newOperation(); // Avoid division by zero
+  }
+  document.getElementById('operation').innerText = `${num1} ${operation} ${num2}`;
+  document.getElementById('operation').dataset.correctAnswer = correctAnswer;
+}
+
+function checkAnswer() {
   
-}
-img5.onclick=function () {
-
-   h5.style.display='block'
- h5.innerHTML='D I S C O V E R'
-h5.style.transform="scalex(0.5)"
-   
-       h1.style.display='none'
-       h2.style.display='none'
-     h4.style.display='none'
-     h3.style.display='none'
-     h6.style.display='none'
-     h7.style.display='none'
-     h8.style.display='none'
-
+  const userAnswer = parseFloat(document.getElementById('answer').innerHTML);
+  const correctAnswer = parseFloat(document.getElementById('operation').dataset.correctAnswer);
+  const resultDiv = document.getElementById('result');
   
-}
-img6.onclick=function () {
-
-   h6.style.display='block'
- h6.innerHTML='D I S C O V E R'
-h6.style.transform="scalex(0.5)"
-   
-  
-       h1.style.display='none'
-       h2.style.display='none'
-     h4.style.display='none'
-     h5.style.display='none'
-     h3.style.display='none'
-     h7.style.display='none'
-     h8.style.display='none'
-
-}
-img7.onclick=function () {
-
-   h7.style.display='block'
- h7.innerHTML='D I S C O V E R'
-h7.style.transform="scalex(0.5)"
-   
-  
-       h1.style.display='none'
-       h2.style.display='none'
-     h4.style.display='none'
-     h5.style.display='none'
-     h6.style.display='none'
-     h3.style.display='none'
-     h8.style.display='none'
-
-}
-
-img8.onclick=function () {
-
-   h8.style.display='block'
- h8.innerHTML='D I S C O V E R'
-h8.style.transform="scalex(0.5)"
-  
-       h1.style.display='none'
-       h2.style.display='none'
-     h4.style.display='none'
-     h5.style.display='none'
-     h6.style.display='none'
-     h7.style.display='none'
-     h3.style.display='none'
-
-}
-///////
-
-let web=document.getElementById('web')
-let photo=document.getElementById('photo')
-let all=document.getElementById('all')
-
-
-web.onclick=function () {
-    web.style.background='#fdbf60'
-    photo.style.background=''
-    all.style.background='#2C1654'
-if (web.id==='web') {
-img4.style.display='block'
-img6.style.display='none'
-img7.style.display='none'
-img8.style.display='none'
-img1.style.display = 'block'
-img2.style.display = 'block'
-img3.style.display = 'block'
-img5.style.display='block'
-
-}
-
-}
-
-
-photo.onclick=function () {
-    photo.style.background='#fdbf60'
-    web.style.background=''
-    all.style.background='#2C1654'
-    if (photo.id==='photo') {
-img2.style.display='none'
-img1.style.display='none'
-img3.style.display='none'
-img4.style.display='none'
-img6.style.display='block'
-img7.style.display='block'
-img8.style.display='block'
-
-
+const tiop = document.getElementById('tiop');
+  if (userAnswer === correctAnswer) {
+    resultDiv.innerText = "!إجابة صحيحة";
+    resultDiv.style.color='green';
+    for (let i = 0; i < 1; i++) {
+tiop.innerHTML++
+localStorage.setItem('nex', tiop.innerHTML)
     }
-    }
-
-all.onclick=function () {
-    photo.style.background=''
-    web.style.background=''
-    all.style.background='#fdbf60'
-img1.style.display='block'
-img2.style.display='block'
-img3.style.display='block'
-img4.style.display='block'
-img6.style.display='block'
-img7.style.display='block'
-img8.style.display='block'
-
-}
-
-let input=document.querySelector('input')
-let d=document.querySelector('#d')
-let be=document.querySelector('#bb')
-let about=document.querySelector('.about')
-let ab=document.querySelector('#ab')
-let se=document.querySelector('#se')
-let co=document.querySelector('#co')
-let pr=document.querySelector('#pr')
-let sk=document.querySelector('#sk')
-
-be.onclick=function () {
-d.style.display='none'
-input.style.display='block'
-input.focus()
-be.style.borderLeft='2px solid black'
-console.log('rr')
-  
-}
-input.onkeyup=function () {
-  if (input.value==='abo') {
-    
-    ab.click()
-    input.value=''
-    input.style.background='#DDD'
-    input.style.border='2px solid #2C1654'
-  
-    }
-    
-  if (input.value==='ser'){
-    se.click()
-    input.value=''
-    input.style.background='#DDD'
-    input.style.border='2px solid #2C1654'
+    newOperation();
   
     
-  }
-  if (input.value==='con'){
-    co.click()
-    input.value=''
-    input.style.background='#DDD'
-    input.style.border='2px solid #2C1654'
-  
+    }else {
     
-  }
-  if (input.value==='pro'){
-    pr.click()
-    input.value=''
-    input.style.background='#DDD'
-    input.style.border='2px solid #2C1654'
+    resultDiv.innerText = ".إجابة خاطئة، حاول مرة أخرى";
+    resultDiv.style.color='red'
+    ti.innerHTML++
+    localStorage.setItem('nex2', ti.innerHTML)
   
-    
   }
   
-  if (input.value==='ski'){
-    sk.click()
-    input.value=''
-    input.style.background='#DDD'
-    input.style.border='2px solid #2C1654'
-  
-    
-  }
+  document.getElementById('answer').innerHTML = '';
   
 }
 
-// // scrollTo button
-// window.onscroll=function(){
-//   if (window.scrollY>600) {
-//     console.log('ttt')
-//   } else {
-//     console.log('t')
-//     }
-//   }
-//   console.log(window.scrollY)
+document.addEventListener('DOMContentLoaded', (event) => {
+  newOperation();
+});
 
-// onscroll skills
- let btn=document.querySelector(".up");
-
-let span1=document.querySelector("div >span")
-let span2 = document.getElementById("sp")
-let span3 = document.querySelector("div >#spa")
-
-
-window.onscroll = function() {
-  if (window.scrollY >= 2100) {
-    span1.style.padding="10px 130px";
-    span2.style.padding = "10px 120px";
-    span3.style.padding = "10px 75px"
-    // btn.style.display="block"
-
-  } else {
-    span1.style.padding="10px 10px"
-    span2.style.padding="10px 10px"
-    span3.style.padding="10px 10px"
-    // btn.style.display="none"
-
-  }
+function number(value) {
+  // Tab to edit
+   document.getElementById('answer').innerHTML+=value
+   
+  // // localStorage.setItem('num',value)
 }
+let textContent=document.getElementById('answer')
 
-
-btn.onclick=function(){
-  window.scrollTo({
-    left:0, 
-    top:0, 
-    behavior:"smooth"
-  })
-}
-
-// let nv=document.getElementById("d")
-// nv.onclick=() => {
+function removeNumber() {
   
-// }
+  textContent.innerHTML=''
+}
+
+
+        function reloadPage() {
+            location.reload();
+        }
